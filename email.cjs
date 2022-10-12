@@ -5,7 +5,7 @@ module.exports = class Email {
   constructor(request) {
     this.request = request;
     this.to = request.email;
-    this.firstName = request.fullname.split(" ")[0];
+    this.firstName = request.firstname;
     this.from = `Big Ideas Conf. 2022 <${process.env.EMAIL_FROM}>`;
   }
 
@@ -42,7 +42,7 @@ module.exports = class Email {
   async sendRegistration() {
     this.send(
       "registered",
-      "Thank you for registering. You are confirmed for Big Ideas 2022"
+      `Hello ${this.firstName}, Thank you for registering. You are confirmed for Big Ideas 2022`
     );
   }
 };
