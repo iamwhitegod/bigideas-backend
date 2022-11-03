@@ -82,9 +82,10 @@ app.get("/generateQRCode", async (req, res) => {
 app.get("/invite", async (req, res) => {
   const signups = await getAllSignups();
 
-  setTimeout(sendInvite(), 5000);
-  signups.forEach(({ accessID }) => {
-    setTimeout(console.log("invite sent"), 5000);
+  signups.forEach(function (signup, index) {
+    setTimeout(function () {
+      sendInvite(signup);
+    }, index * 20000);
   });
 });
 

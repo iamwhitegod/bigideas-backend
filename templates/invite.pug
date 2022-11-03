@@ -19,10 +19,8 @@ html
             .invite--img
               img(src="https://i.imgur.com/IzKJ3xG.png", alt="big ideas logo")
             p.invite--desc
-              span.fw--800 #{user.firstname}
-              |  has been confirmed for
-
-              span.text--gradient.fw--800 big ideas 2022
+              span.fw--800 Hello #{user.firstname}, 
+              | you have been confirmed for big ideas 2022. Attacted is your details and QR code. 
         tr
           td
             .invite--info
@@ -36,9 +34,9 @@ html
                 | AccessID: 
                 span.fw--800 #{user.accessID}
         tr
-          td
-            img(src=`https://bigideasconf.herokuapp.com/qrcodes/${user.accessID}`, alt="Scan this code")
-            p.fw--800.margin-btm-40 Scan in to sign in guest
+          td.center-text
+            img(src=`https://bigideasconf.herokuapp.com/qrcodes/${user.accessID}.png`, alt="Scan this code")
+            p.fw--800.margin-40 Scan to sign in guest
       tfoot
         tr
           td

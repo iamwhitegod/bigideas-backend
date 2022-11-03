@@ -34,8 +34,9 @@ module.exports = class Email {
       html,
     };
 
-    this.newTransport().sendMail(mailOptions, (err) => {
-      console.log(err);
+    this.newTransport().sendMail(mailOptions, (err, info) => {
+      if (err) console.log(err);
+      if (info) console.log(info);
     });
   }
 

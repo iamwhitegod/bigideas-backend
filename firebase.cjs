@@ -46,17 +46,7 @@ exports.getSignup = async function (accessID) {
 };
 
 exports.sendInvite = async function (signup) {
-  new Email({
-    firstname: "Sanctus",
-    handle: "Whatsapp",
-    lastname: "Ekeh",
-    learn: "From a WhatsApp post",
-    company: "SantiXchange",
-    jobTitle: "Entrepreneur",
-    accessID: "BI752039",
-    email: "whitegodkingsley@gmail.com",
-    phone: "08106184060",
-  }).sendInvite();
+  new Email(signup).sendInvite();
 };
 
 exports.updateSignup = async function (accessID) {
