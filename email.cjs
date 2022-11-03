@@ -45,4 +45,11 @@ module.exports = class Email {
       `Hello ${this.firstName}, Thank you for registering. You are confirmed for Big Ideas 2022`
     );
   }
+
+  async sendInvite() {
+    this.send(
+      "invite",
+      `Hello ${this.firstName}, Here is your official invite to Big Ideas 2022.`
+    );
+  }
 };

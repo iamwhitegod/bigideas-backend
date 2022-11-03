@@ -3,8 +3,15 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
 const path = require("path");
+const qrcode = require("qrcode");
 
 const Email = require("./email.cjs");
+const {
+  getAllSignups,
+  getSignup,
+  sendInvite,
+  updateSignup,
+} = require("./firebase.cjs");
 
 const app = express();
 
@@ -31,6 +38,53 @@ app.post("/register", (req, res) => {
     status: "success",
     message: "Request sent successfully",
     signup,
+  });
+});
+
+app.get("/register", async (req, res) => {
+  const signups = await getAllSignups();
+  console.log(signups);
+
+  res.status(200).json({
+    results: signups.length,
+    status: "success",
+    message: "Request sent successfully",
+    signups,
+  });
+});
+
+app.get("/register/:accessId", async (req, res) => {
+  const signup = await getSignup(req.params.accessId);
+  console.log(signup);
+
+  res.status(200).json({
+    status: "success",
+    signup,
+  });
+});
+
+app.get("/generateQRCode", async (req, res) => {
+  const signups = await getAllSignups();
+
+  signups.forEach(({ accessID }) => {
+    qrcode.toFile(
+      `./qrcodes/${accessID}.png`,
+      `bigideasconf.com/signin-guest/${accessID}`,
+      function (err, data) {
+        if (err) console.log(err.message);
+      }
+    );
+
+    updateSignup(accessID);
+  });
+});
+
+app.get("/invite", async (req, res) => {
+  const signups = await getAllSignups();
+
+  setTimeout(sendInvite(), 5000);
+  signups.forEach(({ accessID }) => {
+    setTimeout(console.log("invite sent"), 5000);
   });
 });
 
