@@ -68,7 +68,7 @@ app.get("/generateQRCode", async (req, res) => {
 
   signups.forEach(({ accessID }) => {
     qrcode.toFile(
-      `./qrcodes/${accessID}.png`,
+      `./public/qrcodes/${accessID}.png`,
       `bigideasconf.com/signin-guest/${accessID}`,
       function (err, data) {
         if (err) console.log(err.message);
